@@ -5,7 +5,17 @@ import requests
 import json
 
 from constats import lat, lon, lang
-from emoji import getEmoji, snowflake, snowman, rain, thunderstorm, THERMOMETER, CLOCK, city_emoji, CALENDAR
+from emoji import (
+    getEmoji,
+    snowflake,
+    snowman,
+    rain,
+    thunderstorm,
+    THERMOMETER,
+    CLOCK,
+    city_emoji,
+    CALENDAR,
+)
 from local_settings import api_key_openweathermap
 from weather_req import check_weather_type
 
@@ -20,7 +30,8 @@ def weather_text_24(dt_txt, weather_type, emoji, req, temp):
         weather_type=weather_type + " " + emoji,
         THERMOMETER=THERMOMETER,
         req=req,
-        temp=temp)
+        temp=temp,
+    )
 
 
 def weather_text_now(place, weather_type, emoji, req, temp):
@@ -30,7 +41,8 @@ def weather_text_now(place, weather_type, emoji, req, temp):
         weather_type=weather_type + " " + emoji,
         THERMOMETER=THERMOMETER,
         req=req,
-        temp=temp)
+        temp=temp,
+    )
 
 
 def weather_text_today(dt_txt_now, weather_type, emoji, req, min_temp, max_temp):
@@ -41,7 +53,8 @@ def weather_text_today(dt_txt_now, weather_type, emoji, req, min_temp, max_temp)
         THERMOMETER=THERMOMETER,
         req=req,
         min_temp=min_temp,
-        max_temp=max_temp)
+        max_temp=max_temp,
+    )
 
 
 def weather_text_tomorrow(dt_txt_now, weather_type, emoji, req, min_temp, max_temp):
@@ -50,14 +63,15 @@ def weather_text_tomorrow(dt_txt_now, weather_type, emoji, req, min_temp, max_te
         weather_type=weather_type + " " + emoji,
         req=req,
         min_temp=min_temp,
-        max_temp=max_temp)
+        max_temp=max_temp,
+    )
 
 
 def create_weather_data(data):
-    place = data['name'] + ", " + data["sys"]["country"]
+    place = data["name"] + ", " + data["sys"]["country"]
     weather_id = data["weather"][0]["id"]
     weather_type = data["weather"][0]["description"]
-    temp = data['main']["temp"]
+    temp = data["main"]["temp"]
 
     req = check_weather_type(weather_type)
     emoji = getEmoji(weather_id)
@@ -67,15 +81,17 @@ def create_weather_data(data):
 def create_forecast_data(data):
     list_data = []
     timezone = data["city"]["timezone"]
-    place = data["city"]['name'] + ", " + data["city"]["country"]
+    place = data["city"]["name"] + ", " + data["city"]["country"]
     list_data.append(place)
     for row in data["list"][:9]:
         date_time_str = row["dt_txt"]
-        dt_txt = (datetime.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S') + datetime.timedelta(
-            seconds=timezone)).strftime("%d.%m %H:%M")
+        dt_txt = (
+            datetime.datetime.strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
+            + datetime.timedelta(seconds=timezone)
+        ).strftime("%d.%m %H:%M")
         weather_id = row["weather"][0]["id"]
         weather_type = row["weather"][0]["description"]
-        temp = row['main']["temp"]
+        temp = row["main"]["temp"]
 
         req = check_weather_type(weather_type)
         emoji = getEmoji(weather_id)
@@ -105,18 +121,21 @@ def short_weather_today(data):
     list_weather_id = []
     list_temp = []
     timezone = data["city"]["timezone"]
-    place = data["city"]['name'] + ", " + data["city"]["country"]
+    place = data["city"]["name"] + ", " + data["city"]["country"]
     list_data.append(place)
 
-    dt_txt_now = (datetime.datetime.utcnow() + datetime.timedelta(
-        seconds=timezone)).strftime("%d.%m.%Y")
+    dt_txt_now = (
+        datetime.datetime.utcnow() + datetime.timedelta(seconds=timezone)
+    ).strftime("%d.%m.%Y")
 
     for row in data["list"][:9]:
-        dt_txt = datetime.datetime.strptime(row["dt_txt"], '%Y-%m-%d %H:%M:%S').strftime("%d.%m.%Y")
+        dt_txt = datetime.datetime.strptime(
+            row["dt_txt"], "%Y-%m-%d %H:%M:%S"
+        ).strftime("%d.%m.%Y")
         if dt_txt_now == dt_txt:
             weather_id = row["weather"][0]["id"]
             weather_type = row["weather"][0]["description"]
-            temp = row['main']["temp"]
+            temp = row["main"]["temp"]
 
             list_weather_type.append(weather_type.lower())
             list_weather_id.append(weather_id)
@@ -136,7 +155,7 @@ def short_weather_today(data):
         emoji = thunderstorm
     elif "снег" in list_weather_type:
         weather_type = "снег"
-        emoji = snowflake + ' ' + snowman
+        emoji = snowflake + " " + snowman
     else:
         weather_type = most_common_object(list_weather_type)
         weather_id = most_common_object(list_weather_id)
@@ -153,17 +172,19 @@ def short_weather_tomorrow(data):
     list_weather_id = []
     list_temp = []
     timezone = data["city"]["timezone"]
-    place = data["city"]['name'] + ", " + data["city"]["country"]
+    place = data["city"]["name"] + ", " + data["city"]["country"]
     list_data.append(place)
 
-    dt_txt_now = (datetime.datetime.utcnow() + datetime.timedelta(
-        seconds=timezone) + datetime.timedelta(
-        days=1)).strftime("%d-%m-%Y")
+    dt_txt_now = (
+        datetime.datetime.utcnow()
+        + datetime.timedelta(seconds=timezone)
+        + datetime.timedelta(days=1)
+    ).strftime("%d-%m-%Y")
 
     for row in data["list"][:9]:
         weather_id = row["weather"][0]["id"]
         weather_type = row["weather"][0]["description"]
-        temp = row['main']["temp"]
+        temp = row["main"]["temp"]
 
         list_weather_type.append(weather_type)
         list_weather_id.append(weather_id)
@@ -180,7 +201,7 @@ def short_weather_tomorrow(data):
         emoji = thunderstorm
     elif "снег" in list_weather_type:
         weather_type = "снег"
-        emoji = snowflake + ' ' + snowman
+        emoji = snowflake + " " + snowman
     else:
         weather_type = most_common_object(list_weather_type)
         weather_id = most_common_object(list_weather_id)
@@ -188,7 +209,9 @@ def short_weather_tomorrow(data):
 
     req = check_weather_type(weather_type)
 
-    return weather_text_tomorrow(dt_txt_now, weather_type, emoji, req, min_temp, max_temp)
+    return weather_text_tomorrow(
+        dt_txt_now, weather_type, emoji, req, min_temp, max_temp
+    )
 
 
 def request_weather(url, lat, lon):
@@ -220,7 +243,7 @@ def get_short_forecast(lat, lon):
     return r
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # get_weather_now(lat, lon)
     r = get_forecast(lat, lon)
     print(r)

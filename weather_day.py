@@ -8,22 +8,27 @@ from weather_api import request_weather, url_forecast
 def create_forecast_data(data):
     list_data = []
     timezone = data["city"]["timezone"]
-    place = data["city"]['name'] + ", " + data["city"]["country"]
+    place = data["city"]["name"] + ", " + data["city"]["country"]
     list_data.append(place)
 
     for row in data["list"]:
         date_time_str = row["dt_txt"]
-        dt_txt = (datetime.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S') + datetime.timedelta(
-            seconds=timezone)).strftime("%d-%m-%Y, %H:%M:%S")
+        dt_txt = (
+            datetime.datetime.strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
+            + datetime.timedelta(seconds=timezone)
+        ).strftime("%d-%m-%Y, %H:%M:%S")
         weather_type = row["weather"][0]["description"]
-        temp = row['main']["temp"]
-        pressure = row['main']["pressure"]
+        temp = row["main"]["temp"]
+        pressure = row["main"]["pressure"]
         wind_speed = row["wind"]["speed"]
 
         data_str = """\nВремя: {dt_txt},\nПогода: {weather_type},\nТемпература: {temp} °C,\nАтмосферное давление: {pressure} hPa,\nСкорость ветра: {wind_speed} м/с""".format(
             dt_txt=dt_txt,
-            weather_type=weather_type, temp=temp,
-            pressure=pressure, wind_speed=wind_speed)
+            weather_type=weather_type,
+            temp=temp,
+            pressure=pressure,
+            wind_speed=wind_speed,
+        )
         list_data.append(data_str)
     return """;\n""".join(list_data)
 
@@ -49,21 +54,24 @@ def weather_today(data):
     list_pressure = []
     list_wind_speed = []
     timezone = data["city"]["timezone"]
-    place = data["city"]['name'] + ", " + data["city"]["country"]
+    place = data["city"]["name"] + ", " + data["city"]["country"]
     list_data.append(place)
 
-    dt_txt_now = (datetime.datetime.utcnow() + datetime.timedelta(
-        seconds=timezone)).strftime("%d-%m-%Y")
+    dt_txt_now = (
+        datetime.datetime.utcnow() + datetime.timedelta(seconds=timezone)
+    ).strftime("%d-%m-%Y")
 
     for row in data["list"]:
         date_time_str = row["dt_txt"]
-        dt_txt = (datetime.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S') + datetime.timedelta(
-            seconds=timezone)).strftime("%d-%m-%Y")
+        dt_txt = (
+            datetime.datetime.strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
+            + datetime.timedelta(seconds=timezone)
+        ).strftime("%d-%m-%Y")
         # print(dt_txt_now, dt_txt)
         if dt_txt_now == dt_txt:
             weather_type = row["weather"][0]["description"]
-            temp = row['main']["temp"]
-            pressure = row['main']["pressure"]
+            temp = row["main"]["temp"]
+            pressure = row["main"]["pressure"]
             wind_speed = row["wind"]["speed"]
 
             list_weather_type.append(weather_type)
@@ -95,7 +103,8 @@ def weather_today(data):
         min_pressure=min_pressure,
         max_pressure=max_pressure,
         min_wind_speed=min_wind_speed,
-        max_wind_speed=max_wind_speed)
+        max_wind_speed=max_wind_speed,
+    )
     return data_text
 
 
@@ -105,7 +114,7 @@ def get_forecast(lat, lon):
     return weather_today(data)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # get_weather_now(lat, lon)
     r = get_forecast(lat, lon)
     print(r)
