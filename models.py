@@ -12,7 +12,7 @@ class Users(Base):
     __tablename__ = "users"
 
     id_row = Column(Integer, primary_key=True, autoincrement=True)
-    id_user = Column(Integer, unique=True)
+     id_user = Column(Integer, unique=True)
     city = Column(String)
     country_cod = Column(String)
     lat = Column(String)
