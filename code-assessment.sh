@@ -10,6 +10,7 @@ add_fail() {
 }
 
 black --check . || add_fail black
+mypy main || add_fail mypy
 if [[ ${#FAILURES[@]} -ne 0 ]]; then
     cat <<RESULT
 ===================================================
