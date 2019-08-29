@@ -1,8 +1,7 @@
 import datetime
-from pprint import pprint
 
-from constats import lon, lat
-from weather_api import request_weather, url_forecast
+from modules.constats import lon, lat
+from modules.weather_api import request_weather, url_forecast
 
 
 def create_forecast_data(data):

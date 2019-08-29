@@ -1,16 +1,14 @@
 import telebot
 
-from castom_keyboard import (
+from modules.castom_keyboard import (
     start_keys,
     all_keys,
     chech_location,
     cheange_location_keys,
-    time_subscription_hours,
-    time_subscription_minuts,
     time_subscription_mornirg,
     part_day_subscription,
 )
-from constats import (
+from modules.constats import (
     start_text,
     not_location_text,
     DEBAG,
@@ -29,8 +27,7 @@ from constats import (
     what_should_do,
     SUBSCRIPTION,
 )
-from emoji import CLOSED_UMBRELLA
-from helper import (
+from modules.helper import (
     chech_locate_null_foo,
     get_coord,
     updete_status,
@@ -42,14 +39,13 @@ from helper import (
     update_time_subscription,
 )
 from local_settings import api_key_test, api_key_tg
-from similar_word import search_city, get_coordinats_city
-from user_data import (
+from modules.similar_word import search_city, get_coordinats_city
+from modules.user_data import (
     update_location_user,
     get_location_dict,
-    data_location,
     update_location_user_city,
 )
-from weather_api import (
+from modules.weather_api import (
     get_weather_now,
     get_forecast,
     request_weather,
