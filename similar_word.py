@@ -49,7 +49,7 @@ def similar2(arr, word):
     full = []
     # for i in arr:
     s.set_seq2(word)
-    for n in (arr):
+    for n in arr:
         s.set_seq1(n)
         full.append((s.ratio(), n))
         full.sort(reverse=True)
@@ -90,5 +90,6 @@ def search_city(country_cod, city_name):
     res_dict = similar_one(city_list, city_name_latin)
     # print(res_dict)
     return res_dict
+
 
 # search_city(country_cod, city_name)

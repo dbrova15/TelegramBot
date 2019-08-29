@@ -1,6 +1,8 @@
 from sqlalchemy import Column, String, Integer, TIMESTAMP, VARCHAR, ForeignKey
+
 # from sqlalchemy.orm import relationship
 from sqlalchemy.sql.functions import now
+
 # from sqlalchemy_imageattach.entity import Image, image_attachment
 
 from base_config import Base, engine
@@ -86,5 +88,5 @@ def init_db():
     # Base.metadata.reflect(bind=engine)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     init_db()

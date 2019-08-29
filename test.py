@@ -7,7 +7,7 @@ def similar(arr):
     full = []
     for i in arr:
         s.set_seq2(i)
-        for n in (arr):
+        for n in arr:
             if n == i:
                 continue
             s.set_seq1(n)
@@ -26,7 +26,7 @@ def similar2(arr, word):
     full = []
     # for i in arr:
     s.set_seq2(word)
-    for n in (arr):
+    for n in arr:
         s.set_seq1(n)
         full.append((s.ratio(), n))
         full.sort(reverse=True)
@@ -56,7 +56,7 @@ def similar2(arr, word):
 #
 # bot.send_message(message.chat.id, end_set_city_text, reply_markup=keyboard, parse_mode="Markdown")
 
-DATETIME_FORMAT_BASE = '%Y-%m-%d %H:%M'
+DATETIME_FORMAT_BASE = "%Y-%m-%d %H:%M"
 #
 # date = (datetime.datetime.now() + datetime.timedelta(
 #     days=1)).date()

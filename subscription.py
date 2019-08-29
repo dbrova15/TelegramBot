@@ -12,8 +12,7 @@ def send_short_forecast(id_user):
 
 
 def delete_time_send():
-    db_session.query(Users).update(
-        {"time_send_sub": None})
+    db_session.query(Users).update({"time_send_sub": None})
     db_session.commit()
 
 

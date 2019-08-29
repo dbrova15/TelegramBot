@@ -14,7 +14,13 @@ project_dir = basedir.replace("\\", "/").split("/")[-2]
 if DEBAG:
     engine = create_engine("sqlite:///base.db")
 else:
-    engine = create_engine(DATABASE_URL, encoding='utf8', pool_recycle=280, pool_size=100, pool_pre_ping=True)
+    engine = create_engine(
+        DATABASE_URL,
+        encoding="utf8",
+        pool_recycle=280,
+        pool_size=100,
+        pool_pre_ping=True,
+    )
 
 
 session_factory = sessionmaker(bind=engine)
