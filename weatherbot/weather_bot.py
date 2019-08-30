@@ -26,7 +26,8 @@ from modules.constats import (
     BACK,
     what_should_do,
     SUBSCRIPTION,
-    info_button)
+    info_button,
+)
 from modules.helper import (
     chech_locate_null_foo,
     get_coord,
