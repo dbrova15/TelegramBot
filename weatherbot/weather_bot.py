@@ -26,7 +26,7 @@ from modules.constats import (
     BACK,
     what_should_do,
     SUBSCRIPTION,
-)
+    info_button)
 from modules.helper import (
     chech_locate_null_foo,
     get_coord,
@@ -230,7 +230,7 @@ def send_text(message):
                 keyboard = all_keys()
                 bot.send_message(
                     message.chat.id,
-                    end_set_city_text,
+                    end_set_city_text + "\n" + "=" * 30 + "\n" + info_button,
                     reply_markup=keyboard,
                     parse_mode="Markdown",
                 )
