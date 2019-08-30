@@ -1,7 +1,7 @@
 import datetime
 import json
-from base_config import db_session
-from models import Users
+from modules.base_config import db_session
+from modules.models import Users
 
 
 def tomorrow_date():

@@ -1,6 +1,10 @@
-from base_config import db_session
-from helper import add_or_update_coord, chech_locate_null_foo, get_location_data_foo
-from models import Users
+from modules.base_config import db_session
+from modules.helper import (
+    add_or_update_coord,
+    chech_locate_null_foo,
+    get_location_data_foo,
+)
+from modules.models import Users
 
 data_location = {}
 
