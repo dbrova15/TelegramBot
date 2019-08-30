@@ -10,7 +10,6 @@ else:
 
 print(DEBAG)
 
-
 WHEATHER_NOW = "Погода сейчас"
 WHEATHER_F_SHORT = "Прогноз на сегодня"
 DETAL_WHEATHER = "Детальный прогноз на 24 часа"

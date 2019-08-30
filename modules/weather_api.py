@@ -23,7 +23,9 @@ url_forecast = "https://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&A
 
 
 def weather_text_24(dt_txt, weather_type, emoji, req, temp):
-    return """\n*Время* {CLOCK}: {dt_txt},\n*Погода*: {weather_type},\n*Температура* {THERMOMETER}: {temp} °C{req}""".format(
+    return """\n*Время* {CLOCK}: {dt_txt},\n
+    *Погода*: {weather_type},\n
+    *Температура* {THERMOMETER}: {temp} °C{req}""".format(
         CLOCK=CLOCK,
         dt_txt=dt_txt,
         weather_type=weather_type + " " + emoji,
@@ -34,7 +36,10 @@ def weather_text_24(dt_txt, weather_type, emoji, req, temp):
 
 
 def weather_text_now(place, weather_type, emoji, req, temp):
-    return """\n*Ваш город* {city_emoji}: {place},\n*Погода*: {weather_type},\n*Температура* {THERMOMETER}: {temp} °C{req}\n""".format(
+    return """\n*Ваш город* {city_emoji}: {place},
+    \n*Погода*: {weather_type},
+    \n*Температура* {THERMOMETER}: {temp} °C{req}
+    \n""".format(
         place=place,
         city_emoji=city_emoji,
         weather_type=weather_type + " " + emoji,
@@ -45,7 +50,8 @@ def weather_text_now(place, weather_type, emoji, req, temp):
 
 
 def weather_text_today(dt_txt_now, weather_type, emoji, req, min_temp, max_temp):
-    return """*Дата* {CALENDAR}: {dt_txt_now},\n*Погода*: {weather_type},\n*Темпераура* {THERMOMETER}: {min_temp} - {max_temp} °C{req}\n""".format(
+    return """*Дата* {CALENDAR}: {dt_txt_now},\n*Погода*: {weather_type},
+        \n*Темпераура* {THERMOMETER}: {min_temp} - {max_temp} °C{req}\n""".format(
         dt_txt_now=dt_txt_now,
         CALENDAR=CALENDAR,
         weather_type=weather_type + " " + emoji,
