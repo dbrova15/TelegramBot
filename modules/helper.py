@@ -1,5 +1,9 @@
 import datetime
 import json
+import sqlite3
+
+import sqlalchemy
+
 from modules.base_config import db_session
 from modules.models import Users
 
@@ -46,7 +50,16 @@ def update_country_cod(id_user, country_cod):
 def add_coord(id_user, city, country_cod, lat, lon, timezone):
     obj = Users(id_user, city, country_cod, lat, lon, timezone, None)
     db_session.add(obj)
-    db_session.commit()
+    try:
+        db_session.commit()
+    except sqlite3.IntegrityError:
+        db_session.rollback()
+        db_session.close()
+        update_coord(id_user, city, country_cod, lat, lon, timezone)
+    except sqlalchemy.exc.IntegrityError:
+        db_session.rollback()
+        db_session.close()
+        update_coord(id_user, city, country_cod, lat, lon, timezone)
 
 
 def update_coord(id_user, city, country_cod, lat, lon, timezone):
