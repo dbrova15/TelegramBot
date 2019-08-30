@@ -1,8 +1,8 @@
-from base_config import db_session
-from helper import get_coord
+from modules.base_config import db_session
+from modules.helper import get_coord
 from main import bot
-from models import Users
-from weather_api import get_short_forecast
+from modules.models import Users
+from modules.weather_api import get_short_forecast
 
 
 def send_short_forecast(id_user):

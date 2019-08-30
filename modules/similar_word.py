@@ -1,11 +1,10 @@
 import difflib
 import json
-from concurrent.futures.thread import ThreadPoolExecutor
 
 from transliterate import translit
 import codecs
 
-from constats import MAX_WORKERS, city_name, country_cod
+from modules.constats import city_name, country_cod
 
 city_name_latin = translit(city_name, "ru", reversed=True)
 country_cod_latin = translit(country_cod.upper(), "ru", reversed=True)

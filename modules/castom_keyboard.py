@@ -2,7 +2,7 @@ import telebot
 from datetime import datetime, timedelta
 from telebot import types
 
-from constats import (
+from modules.constats import (
     WHEATHER_NOW,
     WHEATHER_F_SHORT,
     DETAL_WHEATHER,
@@ -10,9 +10,8 @@ from constats import (
     SEND_LOCALION,
     BACK,
     CHEANGE_LOCATION,
-    SUBSCRIPTION,
 )
-from user_data import data_location
+from modules.user_data import data_location
 
 
 def part_day_subscription():

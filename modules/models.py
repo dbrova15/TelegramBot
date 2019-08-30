@@ -1,11 +1,11 @@
-from sqlalchemy import Column, String, Integer, TIMESTAMP, VARCHAR, ForeignKey
+from sqlalchemy import Column, String, Integer, TIMESTAMP, VARCHAR
 
 # from sqlalchemy.orm import relationship
 from sqlalchemy.sql.functions import now
 
 # from sqlalchemy_imageattach.entity import Image, image_attachment
 
-from base_config import Base, engine
+from modules.base_config import Base, engine
 
 
 class Users(Base):

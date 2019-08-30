@@ -1,11 +1,10 @@
 import datetime
-from pprint import pprint
 
 import requests
 import json
 
-from constats import lat, lon, lang
-from emoji import (
+from modules.constats import lat, lon, lang
+from modules.emoji import (
     getEmoji,
     snowflake,
     snowman,
@@ -17,7 +16,7 @@ from emoji import (
     CALENDAR,
 )
 from local_settings import api_key_openweathermap
-from weather_req import check_weather_type
+from modules.weather_req import check_weather_type
 
 url_weather_now = "https://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&APPID={}&units=metric&lang={}"
 url_forecast = "https://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&APPID={}&units=metric&lang={}&cnt=10"

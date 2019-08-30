@@ -1,4 +1,4 @@
-from emoji import CLOSED_UMBRELLA, warning_mark
+from modules.emoji import CLOSED_UMBRELLA, warning_mark
 
 REIN = "дождь"
 LIGHT_RAIN = ""
