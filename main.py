@@ -75,7 +75,8 @@ def start_bot(message):
     bot.send_message(
         message.chat.id, get_location_dict(message.chat.id), reply_markup=keyboard
     )
-    # bot.send_message(message.chat.id, CLOSED_UMBRELLA, reply_markup=keyboard, parse_mode="Markdown")
+    # bot.send_message(message.chat.id, CLOSED_UMBRELLA,
+    # reply_markup=keyboard, parse_mode="Markdown")
 
 
 @bot.message_handler(commands=["start"])

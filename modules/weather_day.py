@@ -21,7 +21,10 @@ def create_forecast_data(data):
         pressure = row["main"]["pressure"]
         wind_speed = row["wind"]["speed"]
 
-        data_str = """\nВремя: {dt_txt},\nПогода: {weather_type},\nТемпература: {temp} °C,\nАтмосферное давление: {pressure} hPa,\nСкорость ветра: {wind_speed} м/с""".format(
+        data_str = """\nВремя: {dt_txt},\nПогода: {weather_type},\nТ
+        емпература: {temp} °C,\n
+        Атмосферное давление: {pressure} hPa,\n
+        Скорость ветра: {wind_speed} м/с""".format(
             dt_txt=dt_txt,
             weather_type=weather_type,
             temp=temp,

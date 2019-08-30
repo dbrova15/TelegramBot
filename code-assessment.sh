@@ -10,6 +10,7 @@ add_fail() {
 }
 
 black --check . || add_fail black
+flake8 . || add_fail flake8
 if [[ ${#FAILURES[@]} -ne 0 ]]; then
     cat <<RESULT
 ===================================================
