@@ -12,7 +12,7 @@ project_dir = basedir.replace("\\", "/").split("/")[-2]
 
 # DEBAG = False
 if DEBAG:
-    engine = create_engine("sqlite:///base.db")
+    engine = create_engine("sqlite:///../base.db")
 else:
     engine = create_engine(
         DATABASE_URL,
