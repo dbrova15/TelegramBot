@@ -9,7 +9,7 @@ from modules.constats import city_name, country_cod
 city_name_latin = translit(city_name, "ru", reversed=True)
 country_cod_latin = translit(country_cod.upper(), "ru", reversed=True)
 
-fileObj = codecs.open("../data/city.list.json", "r", "utf_8_sig")
+fileObj = codecs.open("data/city.list.json", "r", "utf_8_sig")
 text = fileObj.read()
 fileObj.close()
 json_obj = json.loads(text)

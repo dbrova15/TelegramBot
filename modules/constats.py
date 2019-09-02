@@ -1,7 +1,9 @@
+import os
 import socket
 
 hostname = socket.gethostname()
 # print(hostname)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 if hostname == "MI-Bakz":
     DEBAG = True
@@ -28,6 +30,28 @@ STATUS = 0
 
 city_name = "Днипро"
 country_cod = "ua"
+
+TEXT_WEATHER_TODAY = '''
+*Дата* {CALENDAR}: {dt_txt_now},
+*Погода*: {weather_type},
+*Темпераура* {THERMOMETER}: {min_temp} - {max_temp} °C{req}'''
+
+TEXT_WEATER_NOW = """
+*Ваш город* {city_emoji}: {place},
+*Погода*: {weather_type},
+*Температура* {THERMOMETER}: {temp} °C{req}
+"""
+
+TEXT_WEATER_24 = """
+*Время* {CLOCK}: {dt_txt},
+*Погода*: {weather_type},
+*Температура* {THERMOMETER}: {temp} °C{req}"""
+
+TEXT_WEATER_TOMORROW = """
+*Завтра*:
+Дата: {dt_txt_now},
+*Погода*: {weather_type},{req}
+*Темпераура* {min_temp} - {max_temp} °C"""
 
 start_text = """Привет! Я бот для получения данных о погоде. Для начала мне нужно узнать твоё местоположение. Для этого нажми кнопку {} или {}.
 """.format(
