@@ -31,10 +31,10 @@ STATUS = 0
 city_name = "Днипро"
 country_cod = "ua"
 
-TEXT_WEATHER_TODAY = '''
+TEXT_WEATHER_TODAY = """
 *Дата* {CALENDAR}: {dt_txt_now},
 *Погода*: {weather_type},
-*Темпераура* {THERMOMETER}: {min_temp} - {max_temp} °C{req}'''
+*Темпераура* {THERMOMETER}: {min_temp} - {max_temp} °C{req}"""
 
 TEXT_WEATER_NOW = """
 *Ваш город* {city_emoji}: {place},

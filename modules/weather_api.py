@@ -3,7 +3,15 @@ import datetime
 import requests
 import json
 
-from modules.constats import lat, lon, lang, TEXT_WEATHER_TODAY, TEXT_WEATER_NOW, TEXT_WEATER_24, TEXT_WEATER_TOMORROW
+from modules.constats import (
+    lat,
+    lon,
+    lang,
+    TEXT_WEATHER_TODAY,
+    TEXT_WEATER_NOW,
+    TEXT_WEATER_24,
+    TEXT_WEATER_TOMORROW,
+)
 from modules.emoji import (
     getEmoji,
     snowflake,

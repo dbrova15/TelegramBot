@@ -29,5 +29,4 @@ def worker_sub():
 
 # worker_sub()
 
-data = db_session.query(Users).filter(Users.time_send_sub.
-                                      is_(None)).all()
+data = db_session.query(Users).filter(Users.time_send_sub.is_(None)).all()

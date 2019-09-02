@@ -9,10 +9,10 @@ from local_settings import DATABASE_URL
 
 basedir = os.path.abspath(os.path.dirname(__file__))  # .replace("\\", "/")
 project_dir = basedir.replace("\\", "/").split("/")[-2]
-print(os.path.join(BASE_DIR, 'base.db'))
+print(os.path.join(BASE_DIR, "base.db"))
 # DEBAG = False
 if DEBAG:
-    engine = create_engine("sqlite:///{}".format(os.path.join(BASE_DIR, 'base.db')))
+    engine = create_engine("sqlite:///{}".format(os.path.join(BASE_DIR, "base.db")))
 else:
     engine = create_engine(
         DATABASE_URL,
