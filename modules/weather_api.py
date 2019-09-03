@@ -3,7 +3,15 @@ import datetime
 import requests
 import json
 
-from modules.constats import lat, lon, lang
+from modules.constats import (
+    lat,
+    lon,
+    lang,
+    TEXT_WEATHER_TODAY,
+    TEXT_WEATER_NOW,
+    TEXT_WEATER_24,
+    TEXT_WEATER_TOMORROW,
+)
 from modules.emoji import (
     getEmoji,
     snowflake,
@@ -23,9 +31,7 @@ url_forecast = "https://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&A
 
 
 def weather_text_24(dt_txt, weather_type, emoji, req, temp):
-    return """\n*Время* {CLOCK}: {dt_txt},\n
-    *Погода*: {weather_type},\n
-    *Температура* {THERMOMETER}: {temp} °C{req}""".format(
+    return TEXT_WEATER_24.format(
         CLOCK=CLOCK,
         dt_txt=dt_txt,
         weather_type=weather_type + " " + emoji,
@@ -36,10 +42,7 @@ def weather_text_24(dt_txt, weather_type, emoji, req, temp):
 
 
 def weather_text_now(place, weather_type, emoji, req, temp):
-    return """\n*Ваш город* {city_emoji}: {place},
-    \n*Погода*: {weather_type},
-    \n*Температура* {THERMOMETER}: {temp} °C{req}
-    \n""".format(
+    return TEXT_WEATER_NOW.format(
         place=place,
         city_emoji=city_emoji,
         weather_type=weather_type + " " + emoji,
@@ -50,8 +53,7 @@ def weather_text_now(place, weather_type, emoji, req, temp):
 
 
 def weather_text_today(dt_txt_now, weather_type, emoji, req, min_temp, max_temp):
-    return """*Дата* {CALENDAR}: {dt_txt_now},\n*Погода*: {weather_type},
-        \n*Темпераура* {THERMOMETER}: {min_temp} - {max_temp} °C{req}\n""".format(
+    return TEXT_WEATHER_TODAY.format(
         dt_txt_now=dt_txt_now,
         CALENDAR=CALENDAR,
         weather_type=weather_type + " " + emoji,
@@ -63,7 +65,7 @@ def weather_text_today(dt_txt_now, weather_type, emoji, req, min_temp, max_temp)
 
 
 def weather_text_tomorrow(dt_txt_now, weather_type, emoji, req, min_temp, max_temp):
-    """*Завтра*:\nДата: {dt_txt_now},\n*Погода*: {weather_type},{req}\n*Темпераура* {min_temp} - {max_temp} °C,\n""".format(
+    TEXT_WEATER_TOMORROW.format(
         dt_txt_now=dt_txt_now,
         weather_type=weather_type + " " + emoji,
         req=req,
