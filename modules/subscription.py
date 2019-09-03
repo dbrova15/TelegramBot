@@ -47,4 +47,3 @@ def del_null_sub():
 
 
 worker_sub()
-
