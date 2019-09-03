@@ -4,12 +4,12 @@ import json
 from transliterate import translit
 import codecs
 
-from modules.constats import city_name, country_cod
+from modules.constats import city_name, country_cod, BASE_DIR
 
 city_name_latin = translit(city_name, "ru", reversed=True)
 country_cod_latin = translit(country_cod.upper(), "ru", reversed=True)
 
-fileObj = codecs.open("data/city.list.json", "r", "utf_8_sig")
+fileObj = codecs.open("{}/data/city.list.json".format(BASE_DIR), "r", "utf_8_sig")
 text = fileObj.read()
 fileObj.close()
 json_obj = json.loads(text)

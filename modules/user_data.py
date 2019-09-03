@@ -23,7 +23,6 @@ def get_location_dict(chat_id):
 
 
 def update_location_user(message, data):
-
     add_or_update_coord(
         message.chat.id,
         data["name"],

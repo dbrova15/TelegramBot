@@ -89,6 +89,8 @@ def start_message(message):
 def send_text(message):
     print(message.text)
     print("status", get_status(message.chat.id))
+
+    print(message.chat.id, type(message.chat.id))
     if get_status(message.chat.id) == 0:
         if chech_locate_null_foo(message.chat.id):
             keyboard = all_keys()
@@ -268,7 +270,6 @@ def location_now(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
-    print(call.data)
     if get_status(call.message.chat.id) == 4:
         keyboard = time_subscription_mornirg(call.data)
         updete_status(call.message.chat.id, 5)

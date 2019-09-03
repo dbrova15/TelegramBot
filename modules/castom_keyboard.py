@@ -10,6 +10,7 @@ from modules.constats import (
     SEND_LOCALION,
     BACK,
     CHEANGE_LOCATION,
+    SUBSCRIPTION,
 )
 from modules.user_data import data_location
 
@@ -138,7 +139,7 @@ def all_keys():
     keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.row(WHEATHER_NOW, WHEATHER_F_SHORT)
     keyboard.row(DETAL_WHEATHER, CHEANGE_LOCATION)
-    # keyboard.row(SUBSCRIPTION)
+    keyboard.row(SUBSCRIPTION)
 
     # button_geo = types.KeyboardButton(text=SEND_LOCALION, request_location=True)
     # keyboard.add(button_geo)

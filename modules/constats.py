@@ -4,6 +4,7 @@ import socket
 hostname = socket.gethostname()
 # print(hostname)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# project_dir = BASE_DIR.replace("\\", "/").split("/")[-2]
 
 if hostname == "MI-Bakz":
     DEBAG = True
