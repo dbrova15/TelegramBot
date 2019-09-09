@@ -1,8 +1,0 @@
-[flake8]
-max-complexity = 5
-max-line-length = 232
-statistics = True
-count = True
-
-# This section outlines ignored rules.
-ignore = W503, C901
