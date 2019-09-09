@@ -73,20 +73,6 @@ data_sity_list = []
 CHEANGE_LOCATION_MODE = False
 
 
-def worker_sub():
-    data = db_session.query(Users).all()
-
-    for obj in data:
-        if obj.subscription is None:
-            continue
-
-        time_sub_user = datetime.datetime.timestamp(obj.subscription)
-
-        if time.time() > time_sub_user:
-            send_subscription_data(obj.id_user)
-            update_time_sub(obj.id_user, obj.subscription)
-
-
 def send_subscription_data(id_user):
     lat, lon = get_coord(id_user)
     data_forecast = get_short_forecast(lat, lon)
