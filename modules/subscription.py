@@ -1,49 +1,46 @@
 import datetime
+import threading
+import time
 
 from modules.base_config import db_session
-from modules.helper import get_coord, update_time_time_send_sub, del_time_time_send_sub
+from modules.helper import update_time_sub
 from modules.models import Users
-from modules.weather_api import get_short_forecast
-from weatherbot.weather_bot import bot
+from weatherbot.weather_bot import send_subscription_data
 
 
-def send_subscription_data(id_user):
-    lat, lon = get_coord(id_user)
-    data_forecast = get_short_forecast(lat, lon)
-    bot.send_message(id_user, data_forecast, parse_mode="Markdown")
-
-
-def delete_time_send():
-    db_session.query(Users).update({"time_send_sub": None})
-    db_session.commit()
-
-
-def worker_sub():
+def worker_sub() -> None:
     data = db_session.query(Users).all()
 
     for obj in data:
-
-        print(obj.id_user)
-        time_check = datetime.datetime.timestamp(
-            datetime.datetime.now() + datetime.timedelta(minutes=5)
-        )
-        print(obj.subscription)
-        if obj.time_send_sub:
+        if obj.subscription is None:
             continue
+
         time_sub_user = datetime.datetime.timestamp(obj.subscription)
-        print(time_sub_user, time_check)
-        print(time_sub_user - time_check)
-        if time_sub_user < time_check:
-            print(True)
-        send_subscription_data(obj.id_user)
-        update_time_time_send_sub(obj.id_user)
+
+        if time.time() > time_sub_user:
+            send_subscription_data(obj.id_user)
+            update_time_sub(obj.id_user, obj.subscription)
 
 
-def del_null_sub():
-    data = db_session.query(Users).all()
+# def del_null_sub():
+#     data = db_session.query(Users).all()
+#
+#     for obj in data:
+#         del_time_time_send_sub(obj.id_user)
 
-    for obj in data:
-        del_time_time_send_sub(obj.id_user)
+
+def loop_worker() -> None:
+    while True:
+        worker_sub()
+        time.sleep(60)
 
 
-worker_sub()
+def thread_worker() -> None:
+    e1 = threading.Event()
+    t1 = threading.Thread(target=loop_worker)
+    t1.start()
+    e1.set()
+
+
+if __name__ == "__main__":
+    worker_sub()

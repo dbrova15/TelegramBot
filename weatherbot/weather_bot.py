@@ -40,7 +40,9 @@ from modules.helper import (
     update_time_subscription,
 )
 from local_settings import api_key_test, api_key_tg
+
 from modules.similar_word import search_city, get_coordinats_city
+
 from modules.user_data import (
     update_location_user,
     get_location_dict,
@@ -66,7 +68,13 @@ data_sity_list = []
 CHEANGE_LOCATION_MODE = False
 
 
-def start_bot(message):
+def send_subscription_data(id_user) -> None:
+    lat, lon = get_coord(id_user)
+    data_forecast = get_short_forecast(lat, lon)
+    bot.send_message(id_user, data_forecast, parse_mode="Markdown")
+
+
+def start_bot(message) -> None:
     if chech_locate_null_foo(message.chat.id):
         keyboard = all_keys()
     else:
@@ -80,13 +88,13 @@ def start_bot(message):
 
 
 @bot.message_handler(commands=["start"])
-def start_message(message):
+def start_message(message) -> None:
     if message.text == "/start":
         start_bot(message)
 
 
 @bot.message_handler(content_types=["text"])
-def send_text(message):
+def send_text(message) -> None:
     print(message.text)
     print("status", get_status(message.chat.id))
 
@@ -201,7 +209,7 @@ def send_text(message):
 
                     city_name = data_city[1].strip()
                     data_sity_dict = search_city(country_cod, city_name)
-                    update_data_sity_dict(message.chat.id, str(data_sity_dict))
+                    update_data_sity_dict(message.chat.id, data_sity_dict)
                     data_sity_list = "\n".join(
                         [
                             "{}: {}".format(i, data_sity_dict[i])
@@ -238,16 +246,9 @@ def send_text(message):
                     parse_mode="Markdown",
                 )
 
-            # elif get_status(message.chat.id) == 4:
-            #     # keyboard = time_subscription_minuts()
-            #     keyboard = time_subscription_mornirg(message.text)
-            #     bot.send_message(message.chat.id, "axas", reply_markup=keyboard, parse_mode="Markdown")
-            # elif get_status(message.chat.id) == 5:
-            #     pass
-
 
 @bot.message_handler(content_types=["location"])
-def location_now(message):
+def location_now(message) -> None:
     if message.location is not None:
         data = request_weather(
             url_weather_now, message.location.latitude, message.location.longitude
@@ -269,7 +270,7 @@ def location_now(message):
 
 
 @bot.callback_query_handler(func=lambda call: True)
-def callback_worker(call):
+def callback_worker(call) -> None:
     if get_status(call.message.chat.id) == 4:
         keyboard = time_subscription_mornirg(call.data)
         updete_status(call.message.chat.id, 5)
@@ -298,7 +299,11 @@ def callback_worker(call):
             )
 
 
-def weather_bot():
+def weather_bot() -> None:
+    # worker_sub()
+    from modules.subscription import thread_worker
+
+    thread_worker()
     bot.polling()
 
 
