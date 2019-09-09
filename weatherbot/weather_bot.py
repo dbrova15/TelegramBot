@@ -37,7 +37,7 @@ from modules.helper import (
     get_data_sity_dict,
     update_country_cod,
     get_country_cod,
-    update_time_subscription
+    update_time_subscription,
 )
 from local_settings import api_key_test, api_key_tg
 
