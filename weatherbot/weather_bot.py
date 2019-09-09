@@ -68,13 +68,13 @@ data_sity_list = []
 CHEANGE_LOCATION_MODE = False
 
 
-def send_subscription_data(id_user):
+def send_subscription_data(id_user) -> None:
     lat, lon = get_coord(id_user)
     data_forecast = get_short_forecast(lat, lon)
     bot.send_message(id_user, data_forecast, parse_mode="Markdown")
 
 
-def start_bot(message):
+def start_bot(message) -> None:
     if chech_locate_null_foo(message.chat.id):
         keyboard = all_keys()
     else:
@@ -88,13 +88,13 @@ def start_bot(message):
 
 
 @bot.message_handler(commands=["start"])
-def start_message(message):
+def start_message(message) -> None:
     if message.text == "/start":
         start_bot(message)
 
 
 @bot.message_handler(content_types=["text"])
-def send_text(message):
+def send_text(message) -> None:
     print(message.text)
     print("status", get_status(message.chat.id))
 
@@ -248,7 +248,7 @@ def send_text(message):
 
 
 @bot.message_handler(content_types=["location"])
-def location_now(message):
+def location_now(message) -> None:
     if message.location is not None:
         data = request_weather(
             url_weather_now, message.location.latitude, message.location.longitude
@@ -270,7 +270,7 @@ def location_now(message):
 
 
 @bot.callback_query_handler(func=lambda call: True)
-def callback_worker(call):
+def callback_worker(call) -> None:
     if get_status(call.message.chat.id) == 4:
         keyboard = time_subscription_mornirg(call.data)
         updete_status(call.message.chat.id, 5)
@@ -299,7 +299,7 @@ def callback_worker(call):
             )
 
 
-def weather_bot():
+def weather_bot() -> None:
     # worker_sub()
     from modules.subscription import thread_worker
 
