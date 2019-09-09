@@ -8,7 +8,7 @@ from modules.models import Users
 from weatherbot.weather_bot import send_subscription_data
 
 
-def worker_sub():
+def worker_sub() -> None:
     data = db_session.query(Users).all()
 
     for obj in data:
@@ -29,13 +29,13 @@ def worker_sub():
 #         del_time_time_send_sub(obj.id_user)
 
 
-def loop_worker():
+def loop_worker() -> None:
     while True:
         worker_sub()
         time.sleep(60)
 
 
-def thread_worker():
+def thread_worker() -> None:
     e1 = threading.Event()
     t1 = threading.Thread(target=loop_worker)
     t1.start()
