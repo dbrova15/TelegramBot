@@ -35,7 +35,7 @@ def loop_worker():
         time.sleep(60)
 
 
-def tread_worker():
+def thread_worker():
     e1 = threading.Event()
     t1 = threading.Thread(target=loop_worker)
     t1.start()

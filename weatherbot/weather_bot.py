@@ -1,9 +1,5 @@
-import datetime
-import time
-
 import telebot
 
-from modules.base_config import db_session
 from modules.castom_keyboard import (
     start_keys,
     all_keys,
@@ -41,11 +37,10 @@ from modules.helper import (
     get_data_sity_dict,
     update_country_cod,
     get_country_cod,
-    update_time_subscription,
-    update_time_sub,
+    update_time_subscription
 )
 from local_settings import api_key_test, api_key_tg
-from modules.models import Users
+
 from modules.similar_word import search_city, get_coordinats_city
 
 from modules.user_data import (
@@ -306,9 +301,9 @@ def callback_worker(call):
 
 def weather_bot():
     # worker_sub()
-    from modules.subscription import tread_worker
+    from modules.subscription import thread_worker
 
-    tread_worker()
+    thread_worker()
     bot.polling()
 
 
