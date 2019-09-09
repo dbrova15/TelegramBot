@@ -1,5 +1,9 @@
+import datetime
+import time
+
 import telebot
 
+from modules.base_config import db_session
 from modules.castom_keyboard import (
     start_keys,
     all_keys,
@@ -38,9 +42,12 @@ from modules.helper import (
     update_country_cod,
     get_country_cod,
     update_time_subscription,
+    update_time_sub,
 )
 from local_settings import api_key_test, api_key_tg
+from modules.models import Users
 from modules.similar_word import search_city, get_coordinats_city
+
 from modules.user_data import (
     update_location_user,
     get_location_dict,
@@ -64,6 +71,26 @@ bot = telebot.TeleBot(API)
 STATUS = 0
 data_sity_list = []
 CHEANGE_LOCATION_MODE = False
+
+
+def worker_sub():
+    data = db_session.query(Users).all()
+
+    for obj in data:
+        if obj.subscription is None:
+            continue
+
+        time_sub_user = datetime.datetime.timestamp(obj.subscription)
+
+        if time.time() > time_sub_user:
+            send_subscription_data(obj.id_user)
+            update_time_sub(obj.id_user, obj.subscription)
+
+
+def send_subscription_data(id_user):
+    lat, lon = get_coord(id_user)
+    data_forecast = get_short_forecast(lat, lon)
+    bot.send_message(id_user, data_forecast, parse_mode="Markdown")
 
 
 def start_bot(message):
@@ -201,7 +228,7 @@ def send_text(message):
 
                     city_name = data_city[1].strip()
                     data_sity_dict = search_city(country_cod, city_name)
-                    update_data_sity_dict(message.chat.id, str(data_sity_dict))
+                    update_data_sity_dict(message.chat.id, data_sity_dict)
                     data_sity_list = "\n".join(
                         [
                             "{}: {}".format(i, data_sity_dict[i])
@@ -237,13 +264,6 @@ def send_text(message):
                     reply_markup=keyboard,
                     parse_mode="Markdown",
                 )
-
-            # elif get_status(message.chat.id) == 4:
-            #     # keyboard = time_subscription_minuts()
-            #     keyboard = time_subscription_mornirg(message.text)
-            #     bot.send_message(message.chat.id, "axas", reply_markup=keyboard, parse_mode="Markdown")
-            # elif get_status(message.chat.id) == 5:
-            #     pass
 
 
 @bot.message_handler(content_types=["location"])
@@ -299,6 +319,10 @@ def callback_worker(call):
 
 
 def weather_bot():
+    # worker_sub()
+    from modules.subscription import tread_worker
+
+    tread_worker()
     bot.polling()
 
 

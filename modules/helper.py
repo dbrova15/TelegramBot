@@ -14,6 +14,7 @@ def tomorrow_date() -> datetime:
 
 def update_time_subscription(id_user: int, time_str: str) -> None:
     date_time = "{} {}".format(tomorrow_date(), time_str)
+    date_time = datetime.datetime.strptime(date_time, "%Y-%m-%d %H:%M")
 
     db_session.query(Users).filter(Users.id_user == id_user).update(
         {"subscription": date_time}
@@ -21,20 +22,27 @@ def update_time_subscription(id_user: int, time_str: str) -> None:
     db_session.commit()
 
 
-def update_time_time_send_sub(id_user: int) -> None:
-    date_time = datetime.datetime.now()  # "{} {}".format(tomorrow_date(), time_str)
+# def update_time_time_send_sub(id_user: int) -> None:
+#     date_time = datetime.datetime.now()  # "{} {}".format(tomorrow_date(), time_str)
+#
+#     db_session.query(Users).filter(Users.id_user == id_user).update(
+#         {"time_send_sub": date_time}
+#     )
+#     db_session.commit()
 
+
+def update_time_sub(id_user: int, time_sub_user: datetime) -> None:
     db_session.query(Users).filter(Users.id_user == id_user).update(
-        {"time_send_sub": date_time}
+        {"subscription": time_sub_user + datetime.timedelta(hours=24)}
     )
     db_session.commit()
 
 
-def del_time_time_send_sub(id_user: int) -> None:
-    db_session.query(Users).filter(Users.id_user == id_user).update(
-        {"time_send_sub": None}
-    )
-    db_session.commit()
+# def del_time_time_send_sub(id_user: int) -> None:
+#     db_session.query(Users).filter(Users.id_user == id_user).update(
+#         {"time_send_sub": None}
+#     )
+#     db_session.commit()
 
 
 def get_country_cod(id_user: int) -> str:
@@ -140,7 +148,7 @@ def get_status(id_user: int) -> None:
 
 def update_data_sity_dict(id_user: int, data_sity_dict: dict) -> None:
     db_session.query(Users).filter(Users.id_user == id_user).update(
-        {"data_sity_dict": data_sity_dict}
+        {"data_sity_dict": str(data_sity_dict)}
     )
     db_session.commit()
 

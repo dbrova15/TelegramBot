@@ -8,7 +8,7 @@ from modules.constats import DEBAG, BASE_DIR
 from local_settings import DATABASE_URL
 
 
-DEBAG = False
+# DEBAG = False
 if DEBAG:
     engine = create_engine("sqlite:///{}".format(os.path.join(BASE_DIR, "base.db")))
 else:
