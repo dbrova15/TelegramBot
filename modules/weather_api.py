@@ -93,8 +93,8 @@ def create_forecast_data(data):
     for row in data["list"][:9]:
         date_time_str = row["dt_txt"]
         dt_txt = (
-                datetime.datetime.strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
-                + datetime.timedelta(seconds=timezone)
+            datetime.datetime.strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
+            + datetime.timedelta(seconds=timezone)
         ).strftime("%d.%m %H:%M")
         weather_id = row["weather"][0]["id"]
         weather_type = row["weather"][0]["description"]
@@ -132,7 +132,7 @@ def short_weather_today(data):
     list_data.append(place)
 
     dt_txt_now = (
-            datetime.datetime.utcnow() + datetime.timedelta(seconds=timezone)
+        datetime.datetime.utcnow() + datetime.timedelta(seconds=timezone)
     ).strftime("%d.%m.%Y")
 
     for row in data["list"][:9]:
@@ -183,9 +183,9 @@ def short_weather_tomorrow(data):
     list_data.append(place)
 
     dt_txt_now = (
-            datetime.datetime.utcnow()
-            + datetime.timedelta(seconds=timezone)
-            + datetime.timedelta(days=1)
+        datetime.datetime.utcnow()
+        + datetime.timedelta(seconds=timezone)
+        + datetime.timedelta(days=1)
     ).strftime("%d-%m-%Y")
 
     for row in data["list"][:9]:
