@@ -29,9 +29,5 @@ def del_pr_data():
 
 def update_pr_data(name, url, text, path_image):
     db_session.query(PR_modul).filter(PR_modul.name == name).update(
-        {
-            "url": url,
-            "text": text,
-            "path_image": path_image
-        }
+        {"url": url, "text": text, "path_image": path_image}
     )

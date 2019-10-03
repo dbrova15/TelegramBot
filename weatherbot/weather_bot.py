@@ -38,7 +38,8 @@ from modules.helper import (
     update_country_cod,
     get_country_cod,
     update_time_subscription,
-    dell_sub)
+    dell_sub,
+)
 from local_settings import api_key_test, api_key_tg
 
 from modules.similar_word import search_city, get_coordinats_city
@@ -74,10 +75,9 @@ def send_subscription_data(id_user) -> None:
     lat, lon = get_coord(id_user)
     data_forecast = get_short_forecast(lat, lon)
     try:
-        bot.send_message(id_user,
-                     data_forecast,
-                     reply_markup=keyboard,
-                     parse_mode="Markdown")
+        bot.send_message(
+            id_user, data_forecast, reply_markup=keyboard, parse_mode="Markdown"
+        )
     except Exception as e:
         print(id_user)
         # print(e)
