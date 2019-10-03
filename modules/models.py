@@ -63,11 +63,14 @@ class PR_modul(Base):
     name = Column(String, unique=True)
     url = Column(String)
     # picture = image_attachment('Pr_Picture')
+    text = Column(String(500))
     path_image = Column(String(100))
 
-    def __init__(self, name, url):
+    def __init__(self, name, url, text, path_image):
         self.name = name
         self.url = url
+        self.text = text
+        self.path_image = path_image
 
 
 # class Pr_Picture(Base, Image):
