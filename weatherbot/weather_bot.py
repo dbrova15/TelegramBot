@@ -38,10 +38,11 @@ from modules.helper import (
     update_country_cod,
     get_country_cod,
     update_time_subscription,
-)
+    dell_sub)
 from local_settings import api_key_test, api_key_tg
 
 from modules.similar_word import search_city, get_coordinats_city
+
 
 from modules.user_data import (
     update_location_user,
@@ -69,9 +70,21 @@ CHEANGE_LOCATION_MODE = False
 
 
 def send_subscription_data(id_user) -> None:
+    keyboard = all_keys()
     lat, lon = get_coord(id_user)
     data_forecast = get_short_forecast(lat, lon)
-    bot.send_message(id_user, data_forecast, parse_mode="Markdown")
+    try:
+        bot.send_message(id_user,
+                     data_forecast,
+                     reply_markup=keyboard,
+                     parse_mode="Markdown")
+    except Exception as e:
+        print(id_user)
+        # print(e)
+        if "Bad Request: chat not found" in str(e):
+            print("Bad Request: chat not found")
+            # from modules.subscription import dell_sub
+            dell_sub(id_user)
 
 
 def start_bot(message) -> None:

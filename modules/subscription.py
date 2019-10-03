@@ -18,6 +18,7 @@ def worker_sub() -> None:
         time_sub_user = datetime.datetime.timestamp(obj.subscription)
 
         if time.time() > time_sub_user:
+            # time.sleep(5)
             send_subscription_data(obj.id_user)
             update_time_sub(obj.id_user, obj.subscription)
 

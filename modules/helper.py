@@ -36,6 +36,11 @@ def update_time_sub(id_user: int, time_sub_user: datetime) -> None:
     db_session.commit()
 
 
+def dell_sub(id_user):
+    db_session.query(Users).filter(Users.id_user == id_user).delete()
+    db_session.commit()
+
+
 # def del_time_time_send_sub(id_user: int) -> None:
 #     db_session.query(Users).filter(Users.id_user == id_user).update(
 #         {"time_send_sub": None}
